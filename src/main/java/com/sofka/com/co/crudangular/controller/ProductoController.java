@@ -50,7 +50,7 @@ public class ProductoController {
         if (productoDto.getPrecio ( ) == null || productoDto.getPrecio ( ) < 0)
             return new ResponseEntity ( new Mensaje ( "el precio debe ser mayor que 0" ) , HttpStatus.BAD_REQUEST );
         if (productoService.existsByNombre ( productoDto.getNombre ( ) ))
-            return new ResponseEntity ( new Mensaje ( "ese nombre ya existe" ) , HttpStatus.BAD_REQUEST );
+            return new ResponseEntity ( new Mensaje ( ( "Ya existe un producto con el nombre de : " + productoDto.getNombre()) ) , HttpStatus.BAD_REQUEST );
         Producto producto = new Producto ( productoDto.getNombre ( ) , productoDto.getPrecio ( ) );
         productoService.save ( producto );
         return new ResponseEntity ( new Mensaje ( "producto creado" ) , HttpStatus.OK );
@@ -61,7 +61,7 @@ public class ProductoController {
         if (!productoService.existsById ( id ))
             return new ResponseEntity ( new Mensaje ( "no existe" ) , HttpStatus.NOT_FOUND );
         if (productoService.existsByNombre ( productoDto.getNombre ( ) ) && productoService.getByNombre ( productoDto.getNombre ( ) ).get ( ).getId ( ) != id)
-            return new ResponseEntity ( new Mensaje ( "ese nombre ya existe" ) , HttpStatus.BAD_REQUEST );
+            return new ResponseEntity ( new Mensaje ( "Ya existe un producto con el nombre de : " + productoDto.getNombre()) , HttpStatus.BAD_REQUEST );
         if (StringUtils.isBlank ( productoDto.getNombre ( ) ))
             return new ResponseEntity ( new Mensaje ( "el nombre es obligatorio" ) , HttpStatus.BAD_REQUEST );
         if (productoDto.getPrecio ( ) == null || productoDto.getPrecio ( ) < 0)
