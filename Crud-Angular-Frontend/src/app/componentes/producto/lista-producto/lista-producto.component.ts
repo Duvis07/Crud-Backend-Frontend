@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ProductoService } from 'src/app/service/producto.service';
 import { Producto } from '../../modelo/producto';
 
@@ -9,9 +10,11 @@ import { Producto } from '../../modelo/producto';
 })
 export class ListaProductoComponent implements OnInit {
   productos: Producto[] = [];
-  toastr: any;
 
-  constructor(private productoService: ProductoService) {}
+  constructor(
+    private productoService: ProductoService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.cargarProductos();
